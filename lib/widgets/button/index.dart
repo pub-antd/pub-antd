@@ -1,10 +1,3 @@
-import 'package:flutter/material.dart';
+import 'package:pub_antd/widgets/view/index.dart';
 
-class Button extends StatelessWidget {
-  const Button({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
+class AntdButton extends AntdView {}
