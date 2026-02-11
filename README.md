@@ -1,40 +1,82 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# pub_antd
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+基于 Flutter 的 **Ant Design 风格** 组件库，提供一致的设计语言与开箱即用的业务组件，适合中后台与桌面端应用。
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+## 特性
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+- **设计一致**：遵循 Ant Design 的设计规范，视觉与交互风格统一
+- **开箱即用**：常用组件封装完善，减少重复造轮子
+- **易于扩展**：结构清晰，便于按业务需求二次封装
 
-## Features
+## 安装
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+在 `pubspec.yaml` 中添加依赖：
 
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  pub_antd:
+    git:
+      url: https://github.com/你的用户名/pub_antd.git
+      ref: main
 ```
 
-## Additional information
+或使用 path 依赖进行本地开发：
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
-# pub-antd
+```yaml
+dependencies:
+  pub_antd:
+    path: ../pub_antd
+```
+
+然后执行：
+
+```bash
+flutter pub get
+```
+
+## 快速开始
+
+```dart
+import 'package:pub_antd/pub_antd.dart';
+
+// 使用基础容器
+AntdView(
+  child: Text('内容'),
+)
+
+// 使用按钮
+AntdButton()
+```
+
+## 组件列表
+
+| 组件 | 说明 |
+|------|------|
+| AntdView | 基础容器组件 |
+| AntdButton | 按钮组件 |
+
+（后续会持续补充 Table、Form、Input、Modal 等 Ant Design 常见组件）
+
+## 本地演示
+
+在仓库中运行 example 应用即可预览所有组件：
+
+```bash
+cd example
+flutter run
+```
+
+或从项目根目录：
+
+```bash
+flutter run -C example
+```
+
+## 环境要求
+
+- Dart ^3.10.3
+- Flutter >= 1.17.0
+
+## 许可
+
+见 [LICENSE](LICENSE) 文件。
