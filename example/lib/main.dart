@@ -42,6 +42,7 @@ class DemoHomePage extends StatelessWidget {
                 const Text('基础容器组件：'),
                 const SizedBox(height: 8),
                 AntdView(
+                  style: const BoxDecoration(color: Colors.red),
                   child: Padding(
                     padding: const EdgeInsets.all(12),
                     child: Text(
@@ -61,7 +62,15 @@ class DemoHomePage extends StatelessWidget {
               children: [
                 const Text('按钮组件（继承自 AntdView）：'),
                 const SizedBox(height: 8),
-                AntdButton(),
+                AntdButton(
+                  text: '按钮1',
+                  color: Colors.red,
+                  onTap: () {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(const SnackBar(content: Text('按钮点击')));
+                  },
+                ),
               ],
             ),
           ),
@@ -84,9 +93,9 @@ class _Section extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         child,
