@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pub_antd/widgets/token.dart';
 
 class AntdButtonProps {
   final String? text;
@@ -71,22 +72,58 @@ class AntdButton extends StatelessWidget {
     this.textStyle,
   });
 
+  EdgeInsets _getSize() {
+    switch (size) {
+      case AntdButtonSize.small:
+        return const EdgeInsets.symmetric(
+          horizontal: AntdToken.buttonPaddingHorizontalSmall,
+        );
+      case AntdButtonSize.large:
+        return const EdgeInsets.symmetric(
+          horizontal: AntdToken.buttonPaddingHorizontalLarge,
+        );
+      default:
+        return const EdgeInsets.symmetric(
+          horizontal: AntdToken.buttonPaddingHorizontal,
+        );
+    }
+  }
+
+  double _getHeight() {
+    switch (size) {
+      case AntdButtonSize.small:
+        return AntdToken.buttonHeightSmall;
+      case AntdButtonSize.large:
+        return AntdToken.buttonHeightLarge;
+      default:
+        return AntdToken.buttonHeightMedium;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(12),
+        height: _getHeight(),
+        padding: _getSize(),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(4),
+          border: Border.all(color: AntdToken.borderColor),
         ),
-        child:
-            child ??
-            Text(
-              text ?? '',
-              style: textStyle ?? TextStyle(color: Colors.white),
-            ),
+        child: Center(
+          child:
+              child ??
+              Text(
+                text ?? '',
+                style:
+                    textStyle ??
+                    TextStyle(
+                      color: color != null ? Colors.white : Colors.black,
+                    ),
+              ),
+        ),
       ),
     );
   }

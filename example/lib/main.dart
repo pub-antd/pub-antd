@@ -62,14 +62,14 @@ class DemoHomePage extends StatelessWidget {
               children: [
                 const Text('按钮组件（继承自 AntdView）：'),
                 const SizedBox(height: 8),
-                AntdButton(
-                  text: '按钮1',
-                  color: Colors.red,
-                  onTap: () {
-                    ScaffoldMessenger.of(
-                      context,
-                    ).showSnackBar(const SnackBar(content: Text('按钮点击')));
-                  },
+                Text('按钮大小：'),
+                Row(
+                  spacing: 12,
+                  children: [
+                    AntdButton(text: 'Large', size: AntdButtonSize.large),
+                    AntdButton(text: 'Default', size: AntdButtonSize.medium),
+                    AntdButton(text: 'Small', size: AntdButtonSize.small),
+                  ],
                 ),
               ],
             ),
