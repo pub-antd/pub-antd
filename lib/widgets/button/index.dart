@@ -1,79 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:pub_antd/widgets/button/helper.dart';
 import 'package:pub_antd/widgets/token.dart';
 
-class AntdButtonProps {
-  final String? text;
-  final Function()? onPressed;
-  const AntdButtonProps({this.text, this.onPressed});
-}
-
-enum AntdButtonType { primary, secondary, ghost, link, text }
-
-enum AntdButtonSize { small, medium, large }
-
-enum AntdButtonColor {
-  // default
-  normal,
-  // primary
-  primary,
-  // danger
-  danger,
-  // pink
-  pink,
-  // purple
-  purple,
-  // gray
-  gray,
-  // yellow
-  yellow,
-  // orange
-  orange,
-  // cyan
-  cyan,
-  // green
-  green,
-  // blue
-  blue,
-  // black
-  black,
-  // white
-  white,
-}
-
-class AntdButton extends StatelessWidget {
-  // color
+class AntdButton extends StatefulWidget {
   final Color? color;
-
-  // size
   final AntdButtonSize? size;
-
-  // type
   final AntdButtonType? type;
-
-  // onTap
   final VoidCallback? onTap;
-
-  // child
   final Widget? child;
-
-  // text
   final String? text;
-  // textStyle
   final TextStyle? textStyle;
-
   const AntdButton({
     super.key,
-    this.text,
     this.color,
     this.size,
     this.type,
     this.onTap,
     this.child,
+    this.text,
     this.textStyle,
   });
+  @override
+  State<AntdButton> createState() => _AntdButtonState();
+}
+
+class _AntdButtonState extends State<AntdButton> {
+  Color _color = AntdToken.defaultColor;
+  TextStyle _textStyle = TextStyle(color: AntdToken.textColor);
+
+  @override
+  void initState() {
+    super.initState();
+    _handleType();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   EdgeInsets _getSize() {
-    switch (size) {
+    switch (widget.size) {
       case AntdButtonSize.small:
         return const EdgeInsets.symmetric(
           horizontal: AntdToken.buttonPaddingHorizontalSmall,
@@ -90,7 +57,7 @@ class AntdButton extends StatelessWidget {
   }
 
   double _getHeight() {
-    switch (size) {
+    switch (widget.size) {
       case AntdButtonSize.small:
         return AntdToken.buttonHeightSmall;
       case AntdButtonSize.large:
@@ -100,29 +67,31 @@ class AntdButton extends StatelessWidget {
     }
   }
 
+  void _handleType() {
+    if (widget.type == AntdButtonType.primary) {
+      _color = widget.color ?? AntdToken.primaryColor;
+      _textStyle = _textStyle.copyWith(color: Colors.white);
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: widget.onTap,
       child: Container(
         height: _getHeight(),
         padding: _getSize(),
         decoration: BoxDecoration(
-          color: color,
+          color: _color,
           borderRadius: BorderRadius.circular(4),
           border: Border.all(color: AntdToken.borderColor),
         ),
         child: Center(
-          child:
-              child ??
-              Text(
-                text ?? '',
-                style:
-                    textStyle ??
-                    TextStyle(
-                      color: color != null ? Colors.white : Colors.black,
-                    ),
-              ),
+          child: DefaultTextStyle(
+            style: _textStyle.merge(widget.textStyle),
+            child: widget.child ?? Text(widget.text ?? ''),
+          ),
         ),
       ),
     );

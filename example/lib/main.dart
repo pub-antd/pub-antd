@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pub_antd/pub_antd.dart';
+import 'package:pub_antd/widgets/button/helper.dart';
 
 void main() {
   runApp(const DemoApp());
@@ -58,6 +59,7 @@ class DemoHomePage extends StatelessWidget {
           _Section(
             title: 'AntdButton',
             child: Column(
+              spacing: 12,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text('按钮组件（继承自 AntdView）：'),
@@ -69,6 +71,17 @@ class DemoHomePage extends StatelessWidget {
                     AntdButton(text: 'Large', size: AntdButtonSize.large),
                     AntdButton(text: 'Default', size: AntdButtonSize.medium),
                     AntdButton(text: 'Small', size: AntdButtonSize.small),
+                  ],
+                ),
+                Text("按钮类型："),
+                Row(
+                  spacing: 12,
+                  children: [
+                    AntdButton(text: 'Primary', type: AntdButtonType.primary),
+                    AntdButton(text: 'Secondary', type: AntdButtonType.normal),
+                    AntdButton(text: 'Ghost', type: AntdButtonType.ghost),
+                    AntdButton(text: 'Link', type: AntdButtonType.link),
+                    AntdButton(text: 'Text', type: AntdButtonType.text),
                   ],
                 ),
               ],
